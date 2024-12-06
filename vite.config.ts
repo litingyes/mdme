@@ -1,4 +1,5 @@
 import type { BuildOptions } from 'vite'
+import { resolve } from 'node:path'
 import process from 'node:process'
 import react from '@vitejs/plugin-react'
 import UnoCSS from 'unocss/vite'
@@ -34,5 +35,10 @@ export default defineConfig(async () => ({
       : 'safari13',
     minify: (!process.env.TAURI_ENV_DEBUG ? 'esbuild' : false) as BuildOptions['minify'],
     sourcemap: !!process.env.TAURI_ENV_DEBUG,
+  },
+  resolve: {
+    alias: {
+      '@': resolve(__dirname, './src'),
+    },
   },
 }))

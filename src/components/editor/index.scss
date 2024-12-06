@@ -1,0 +1,67 @@
+.tiptap {
+  @apply focus-within:outline-none p-4 text-sm text-neutral-800;
+
+  h1[data-name='heading'] {
+    @apply text-4xl text-neutral-950 font-semibold mt-6 mb-5;
+  }
+  h2[data-name='heading'] {
+    @apply text-3xl text-neutral-950 font-semibold mt-5 mb-4;
+  }
+  h3[data-name='heading'] {
+    @apply text-2xl text-neutral-900 font-semibold mt-4 mb-3;
+  }
+  h4[data-name='heading'] {
+    @apply text-xl text-neutral-900 font-semibold mt-3 mb-2;
+  }
+  h5[data-name='heading'] {
+    @apply text-base text-neutral-800 font-semibold my-2;
+  }
+  h6[data-name='heading'] {
+    @apply text-base text-neutral-700 font-semibold my-2;
+  }
+
+  p[data-name='paragraph'] {
+    @apply text-base;
+  }
+  & > p[data-name='paragraph'] {
+    @apply my-2;
+  }
+
+  ul[data-name='bulletList'] {
+    @apply list-disc ml-6;
+
+    & ul {
+      @apply list-circle ml-6;
+    }
+
+    & ul ul {
+      @apply list-square ml-6;
+    }
+  }
+
+  ol[data-name='orderedList'] {
+    @apply list-decimal ml-6;
+  }
+
+  ul[data-name='taskList'] {
+    & > li[data-name='taskItem'] {
+      @apply flex items-center gap-2;
+
+      & > label {
+        @apply select-none;
+
+        input {
+          @apply cursor-pointer;
+        }
+      }
+    }
+  }
+
+  blockquote[data-name='blockquote'] {
+    @apply pl-2 border-l-4 border-solid border-stone-300;
+  }
+
+  hr[data-name='horizontalRule'] {
+    @apply my-6 bg-stone-500;
+  }
+}
