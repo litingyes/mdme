@@ -1,4 +1,7 @@
-use tauri::menu::{Menu, PredefinedMenuItem, Submenu};
+use tauri::{
+    menu::{Menu, MenuItem, PredefinedMenuItem, Submenu},
+    WebviewUrl, WebviewWindowBuilder,
+};
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
@@ -13,6 +16,8 @@ pub fn run() {
                         true,
                         &[
                             &PredefinedMenuItem::about(handle, None, None)?,
+                            &PredefinedMenuItem::separator(handle)?,
+                            &MenuItem::with_id(handle, "settings", "Settings", true, None::<&str>)?,
                             &PredefinedMenuItem::separator(handle)?,
                             &PredefinedMenuItem::services(handle, None)?,
                             &PredefinedMenuItem::separator(handle)?,
@@ -51,6 +56,17 @@ pub fn run() {
                     )?,
                 ],
             )
+        })
+        .on_menu_event(|app, e| {
+            let id = e.id.0;
+
+            if id == "settings" {
+                WebviewWindowBuilder::new(app, "settings", WebviewUrl::App("/settings".into()))
+                    .inner_size(800.0, 400.0)
+                    .position(48.0, 96.0)
+                    .build()
+                    .unwrap();
+            }
         })
         .plugin(tauri_plugin_shell::init())
         .run(tauri::generate_context!())

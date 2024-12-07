@@ -12,9 +12,19 @@
   "app": {
     "windows": [
       {
-        "title": "mdme",
+        "label": "editor",
+        "title": "Mdme",
         "width": 800,
-        "height": 600
+        "height": 600,
+        "url": "/"
+      },
+      {
+        "label": "settings",
+        "title": "Settings",
+        "width": 800,
+        "height": 600,
+        "url": "/settings",
+        "create": false
       }
     ],
     "security": {
