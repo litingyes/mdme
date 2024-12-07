@@ -1,7 +1,7 @@
 import type { BuildOptions } from 'vite'
 import { resolve } from 'node:path'
 import process from 'node:process'
-import react from '@vitejs/plugin-react'
+import { reactRouter } from '@react-router/dev/vite'
 import UnoCSS from 'unocss/vite'
 import { defineConfig } from 'vite'
 
@@ -10,7 +10,7 @@ const host = process.env.TAURI_DEV_HOST
 export default defineConfig(async () => ({
   plugins: [
     UnoCSS(),
-    react(),
+    reactRouter(),
   ],
   clearScreen: false,
   server: {
