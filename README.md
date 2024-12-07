@@ -1,6 +1,9 @@
-<h1 style="display: flex; align-items: center;gap: 4px;">
-  <img src="./public/logo.png" alt='Logo' width="36">
-  Meme
+<div align="center">
+  <img src="./public/logo.png" alt='Logo' width="64">
+</div>
+<h1 align="center">
+  Mdme
 </h1>
-
-An elegant editor for markdown
+<p  align="center">
+  An elegant editor for markdown
+</p>
