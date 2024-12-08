@@ -41,7 +41,7 @@ export default function Appearance() {
     return (
       <RadioGroup value={theme} defaultValue="auto" onChange={value => setTheme(value as Theme | 'auto')} className="mt-2 flex items-center gap-4">
         {THEMES.map(item => (
-          <Radio key={item.label} value={item.label.toLocaleLowerCase()} className="flex cursor-pointer items-center gap-1 rounded-full bg-gray-100 px-3 py-1 text-sm transition-colors data-[active]:bg-gray-300 data-[hover]:bg-gray-200 !data-[checked]:(bg-blue-600 text-white)">
+          <Radio key={item.label} value={item.label.toLocaleLowerCase()} className="flex cursor-pointer items-center gap-1 rounded-full bg-gray-100 px-3 py-1 text-sm transition-colors dark:(bg-gray-700 data-[hover]:bg-gray-600) data-[active]:bg-gray-300 data-[hover]:bg-gray-200 !data-[checked]:(bg-blue-600 text-white)">
             {item.icon}
             {' '}
             {item.label}
