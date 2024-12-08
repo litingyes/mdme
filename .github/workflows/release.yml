@@ -26,6 +26,8 @@ jobs:
     runs-on: ${{ matrix.platform }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: pnpm/action-setup@v4
         with:
           version: 9.14.4
@@ -42,25 +44,23 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev patchelf
       - run: pnpm install
+      - name: Generate CHANGELOG
+        id: generate-changelog
+        run: |
+          tags=$(git tag --sort=-creatordate | head -n 2)
+          to=$(echo "$tags" | sed -n 1p)
+          from=$(echo "$tags" | sed -n 2p)
+          changelog=$(pnpm changelogen --from="$from" --to="$to" --no-output)
+          echo "CHANGELOG<<EOF" >> $GITHUB_OUTPUT
+          echo "$changelog" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+        shell: bash
       - uses: tauri-apps/tauri-action@v0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tagName: app-v__VERSION__
-          releaseName: App v__VERSION__
-          releaseBody: See the assets to download this version and install.
+          tagName: v__VERSION__
+          releaseName: v__VERSION__
+          releaseBody: ${{ steps.generate-changelog.outputs.CHANGELOG }}
           prerelease: false
           args: ${{ matrix.args }}
-  changelog:
-    needs: publish
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - uses: actions/setup-node@v4
-        with:
-          node-version: lts/*
-      - run: npx changelogithub
-        env:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
