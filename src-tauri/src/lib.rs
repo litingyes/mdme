@@ -1,13 +1,17 @@
+use menu::get_theme_menu_items;
 use tauri::{
-    menu::{Menu, MenuItem, PredefinedMenuItem, Submenu},
-    WebviewUrl, WebviewWindowBuilder,
+    menu::{Menu, MenuItem, PredefinedMenuItem, Submenu, SubmenuBuilder},
+    Theme, WebviewUrl, WebviewWindowBuilder,
 };
+mod menu;
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
         .plugin(tauri_plugin_shell::init())
         .menu(|handle| {
+            let (light, dark) = get_theme_menu_items(handle);
+
             Menu::with_items(
                 handle,
                 &[
@@ -42,6 +46,10 @@ pub fn run() {
                             &PredefinedMenuItem::paste(handle, None)?,
                         ],
                     )?,
+                    &SubmenuBuilder::new(handle, "Theme")
+                        .id("theme")
+                        .items(&[&light, &dark])
+                        .build()?,
                     &Submenu::with_items(
                         handle,
                         "Window",
@@ -60,13 +68,48 @@ pub fn run() {
         })
         .on_menu_event(|app, e| {
             let id = e.id.0;
+            let (light, dark) = get_theme_menu_items(app);
 
-            if id == "settings" {
-                WebviewWindowBuilder::new(app, "settings", WebviewUrl::App("/settings".into()))
-                    .inner_size(800.0, 400.0)
-                    .position(48.0, 96.0)
-                    .build()
-                    .unwrap();
+            match id.as_str() {
+                "settings" => {
+                    WebviewWindowBuilder::new(app, "settings", WebviewUrl::App("/settings".into()))
+                        .inner_size(800.0, 400.0)
+                        .position(48.0, 96.0)
+                        .build()
+                        .unwrap();
+                }
+                "theme-light" => {
+                    app.set_theme(Some(Theme::Light));
+
+                    app.menu()
+                        .unwrap()
+                        .get("theme")
+                        .unwrap()
+                        .as_submenu()
+                        .unwrap()
+                        .get(dark.id())
+                        .unwrap()
+                        .as_check_menuitem()
+                        .unwrap()
+                        .set_checked(false)
+                        .unwrap();
+                }
+                "theme-dark" => {
+                    app.set_theme(Some(Theme::Dark));
+                    app.menu()
+                        .unwrap()
+                        .get("theme")
+                        .unwrap()
+                        .as_submenu()
+                        .unwrap()
+                        .get(light.id())
+                        .unwrap()
+                        .as_check_menuitem()
+                        .unwrap()
+                        .set_checked(false)
+                        .unwrap();
+                }
+                _ => {}
             }
         })
         .run(tauri::generate_context!())
