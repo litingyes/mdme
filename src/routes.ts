@@ -5,6 +5,6 @@ import {
 
 export default [
   route('/', './pages/index.tsx'),
-  route('/settings', './pages/settings.tsx'),
+  route('/settings', './pages/settings/index.tsx'),
   route('*?', './pages/404.tsx'),
 ] satisfies RouteConfig

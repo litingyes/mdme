@@ -2,7 +2,9 @@ import { defineConfig, presetIcons, presetUno, transformerDirectives, transforme
 
 export default defineConfig({
   presets: [
-    presetUno(),
+    presetUno({
+      dark: 'media',
+    }),
     presetIcons({
       extraProperties: {
         'display': 'inline-block',
