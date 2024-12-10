@@ -1,6 +1,6 @@
 use menu::{get_app_submenu, get_theme_submenu, get_window_submenu};
 use menu_event::{on_settings, on_theme_dark, on_theme_light};
-use tauri::menu::Menu;
+use tauri::{menu::Menu, Theme, WindowEvent};
 mod menu;
 mod menu_event;
 
@@ -30,6 +30,74 @@ pub fn run() {
                 }
                 _ => {}
             }
+        })
+        .on_window_event(|window, event| match event {
+            WindowEvent::Focused(focused) => {
+                if *focused {
+                    let theme = window.theme().unwrap();
+
+                    match theme {
+                        Theme::Light => {
+                            window
+                                .menu()
+                                .unwrap()
+                                .get("theme")
+                                .unwrap()
+                                .as_submenu()
+                                .unwrap()
+                                .get("theme-light")
+                                .unwrap()
+                                .as_check_menuitem()
+                                .unwrap()
+                                .set_checked(true)
+                                .unwrap();
+                            window
+                                .menu()
+                                .unwrap()
+                                .get("theme")
+                                .unwrap()
+                                .as_submenu()
+                                .unwrap()
+                                .get("theme-dark")
+                                .unwrap()
+                                .as_check_menuitem()
+                                .unwrap()
+                                .set_checked(false)
+                                .unwrap();
+                        }
+                        Theme::Dark => {
+                            window
+                                .menu()
+                                .unwrap()
+                                .get("theme")
+                                .unwrap()
+                                .as_submenu()
+                                .unwrap()
+                                .get("theme-light")
+                                .unwrap()
+                                .as_check_menuitem()
+                                .unwrap()
+                                .set_checked(false)
+                                .unwrap();
+                            window
+                                .menu()
+                                .unwrap()
+                                .get("theme")
+                                .unwrap()
+                                .as_submenu()
+                                .unwrap()
+                                .get("theme-dark")
+                                .unwrap()
+                                .as_check_menuitem()
+                                .unwrap()
+                                .set_checked(true)
+                                .unwrap();
+                        }
+                        _ => {}
+                    }
+                }
+            }
+            _ => {}
         })
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
