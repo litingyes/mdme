@@ -64,4 +64,25 @@
   hr[data-name='horizontalRule'] {
     @apply my-6 bg-stone-500;
   }
+
+  .tableWrapper {
+    @apply overflow-auto;
+
+    & > table {
+      @apply border-collapse table-fixed w-full;
+    }
+  }
+  th[data-name='tableHeader'],
+  td[data-name='tableCell'] {
+    @apply border border-solid border-stone-200 dark:border-stone-800 min-w-16 px-1 py-1 relative align-top;
+  }
+  th[data-name='tableHeader'] {
+    @apply font-semibold text-start bg-gray-100 dark:bg-gray-800;
+  }
+  .column-resize-handle {
+    @apply absolute w-1 top-0 -bottom-0.5 -right-0.5 pointer-events-none bg-blue-500 z-1;
+  }
+  &.resize-cursor {
+    @apply cursor-col-resize;
+  }
 }

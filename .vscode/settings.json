@@ -3,7 +3,9 @@
     "changelogithub",
     "dtolnay",
     "headlessui",
-    "mdme"
+    "mdme",
+    "repr",
+    "Unlisten"
   ],
 
   // Disable the default formatter, use eslint instead

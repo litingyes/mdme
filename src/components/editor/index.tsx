@@ -8,6 +8,7 @@ import { EditorProvider } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import { symbol } from '@vueditor/tiptap-extension-symbol'
 import { Markdown } from 'tiptap-markdown'
+import { tauri } from './extensions/tauri'
 import './index.scss'
 
 export default function Editor() {
@@ -21,12 +22,16 @@ export default function Editor() {
     }),
     TaskList,
     TaskItem,
-    Table,
+    Table.configure({
+      resizable: true,
+      cellMinWidth: 64,
+    }),
     TableRow,
     TableHeader,
     TableCell,
     Markdown,
     symbol,
+    tauri,
   ]
 
   return (

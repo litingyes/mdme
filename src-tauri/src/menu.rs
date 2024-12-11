@@ -64,6 +64,68 @@ pub fn get_theme_submenu(app: &AppHandle) -> Submenu<Wry> {
         .unwrap()
 }
 
+pub fn get_paragraph_submenu(app: &AppHandle) -> Submenu<Wry> {
+    SubmenuBuilder::new(app, "Paragraph")
+        .id("paragraph")
+        .items(&[
+            &CheckMenuItem::with_id(app, "heading-1", "Heading 1", true, false, None::<&str>)
+                .unwrap(),
+            &CheckMenuItem::with_id(app, "heading-2", "Heading 2", true, false, None::<&str>)
+                .unwrap(),
+            &CheckMenuItem::with_id(app, "heading-3", "Heading 3", true, false, None::<&str>)
+                .unwrap(),
+            &CheckMenuItem::with_id(app, "heading-4", "Heading 4", true, false, None::<&str>)
+                .unwrap(),
+            &CheckMenuItem::with_id(app, "heading-5", "Heading 5", true, false, None::<&str>)
+                .unwrap(),
+            &CheckMenuItem::with_id(app, "heading-6", "Heading 6", true, false, None::<&str>)
+                .unwrap(),
+            &PredefinedMenuItem::separator(app).unwrap(),
+            &CheckMenuItem::with_id(app, "paragraph", "Paragraph", true, false, None::<&str>)
+                .unwrap(),
+            &PredefinedMenuItem::separator(app).unwrap(),
+            &CheckMenuItem::with_id(app, "blockquote", "Quote block", true, false, None::<&str>)
+                .unwrap(),
+            &CheckMenuItem::with_id(app, "code-block", "Code block", true, false, None::<&str>)
+                .unwrap(),
+            &SubmenuBuilder::new(app, "Table")
+                .id("table")
+                .items(&[&MenuItem::with_id(
+                    app,
+                    "table-insert",
+                    "Insert table",
+                    true,
+                    None::<&str>,
+                )
+                .unwrap()])
+                .build()
+                .unwrap(),
+            &PredefinedMenuItem::separator(app).unwrap(),
+            &CheckMenuItem::with_id(
+                app,
+                "ordered-list",
+                "Ordered list",
+                true,
+                false,
+                None::<&str>,
+            )
+            .unwrap(),
+            &CheckMenuItem::with_id(
+                app,
+                "bullet-list",
+                "Unordered list",
+                true,
+                false,
+                None::<&str>,
+            )
+            .unwrap(),
+            &CheckMenuItem::with_id(app, "task-list", "Task list", true, false, None::<&str>)
+                .unwrap(),
+        ])
+        .build()
+        .unwrap()
+}
+
 pub fn get_window_submenu(app: &AppHandle) -> Submenu<Wry> {
     SubmenuBuilder::new(app, "Window")
         .id("theme")
