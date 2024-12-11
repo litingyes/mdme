@@ -1,3 +1,4 @@
+import { SingletonDialog } from '@/components/singletonDialog'
 import {
   Links,
   Meta,
@@ -24,7 +25,9 @@ export function Layout({
         <Links />
       </head>
       <body>
-        {children}
+        <SingletonDialog>
+          {children}
+        </SingletonDialog>
         <ScrollRestoration />
         <Scripts />
       </body>
