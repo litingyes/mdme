@@ -63,14 +63,14 @@ export const tauri = Extension.create({
   },
   onUpdate() {
     const { selection } = this.editor.state
-    const node = selection.$anchor.parent
+    const node = selection.$anchor.node(1)
     const nodeName = node.type.name
 
     if (nodeName === 'heading') {
       onChangeEditorActiveDebounce(`heading-${node.attrs.level}`)
     }
     else {
-      onChangeEditorActiveDebounce(nodeName)
+      onChangeEditorActiveDebounce(kebabCase(nodeName))
     }
   },
   onDestroy() {
