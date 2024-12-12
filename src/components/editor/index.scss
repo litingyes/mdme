@@ -1,33 +1,33 @@
 .tiptap {
   @apply focus-within:outline-none p-4 text-sm text-neutral-800 dark:text-neutral-100;
 
-  h1[data-name='heading'] {
+  h1[data-node-name='heading'] {
     @apply text-4xl text-neutral-950 font-semibold mt-6 mb-5 dark:text-neutral-50;
   }
-  h2[data-name='heading'] {
+  h2[data-node-name='heading'] {
     @apply text-3xl text-neutral-950 font-semibold mt-5 mb-4 dark:text-neutral-50;
   }
-  h3[data-name='heading'] {
+  h3[data-node-name='heading'] {
     @apply text-2xl text-neutral-900 font-semibold mt-4 mb-3 dark:text-neutral-100;
   }
-  h4[data-name='heading'] {
+  h4[data-node-name='heading'] {
     @apply text-xl text-neutral-900 font-semibold mt-3 mb-2 dark:text-neutral-100;
   }
-  h5[data-name='heading'] {
+  h5[data-node-name='heading'] {
     @apply text-base text-neutral-800 font-semibold my-2 dark:text-neutral-200;
   }
-  h6[data-name='heading'] {
+  h6[data-node-name='heading'] {
     @apply text-base text-neutral-700 font-semibold my-2 dark:text-neutral-300;
   }
 
-  p[data-name='paragraph'] {
+  p[data-node-name='paragraph'] {
     @apply text-base;
   }
-  & > p[data-name='paragraph'] {
+  & > p[data-node-name='paragraph'] {
     @apply my-2;
   }
 
-  ul[data-name='bulletList'] {
+  ul[data-node-name='bulletList'] {
     @apply list-disc ml-6;
 
     & ul {
@@ -39,12 +39,12 @@
     }
   }
 
-  ol[data-name='orderedList'] {
+  ol[data-node-name='orderedList'] {
     @apply list-decimal ml-6;
   }
 
-  ul[data-name='taskList'] {
-    & > li[data-name='taskItem'] {
+  ul[data-node-name='taskList'] {
+    & > li[data-node-name='taskItem'] {
       @apply flex items-center gap-2;
 
       & > label {
@@ -57,11 +57,11 @@
     }
   }
 
-  blockquote[data-name='blockquote'] {
+  blockquote[data-node-name='blockquote'] {
     @apply pl-2 border-l-4 border-solid border-stone-300;
   }
 
-  hr[data-name='horizontalRule'] {
+  hr[data-node-name='horizontalRule'] {
     @apply my-6 bg-stone-500;
   }
 
@@ -72,11 +72,11 @@
       @apply border-collapse table-fixed w-full;
     }
   }
-  th[data-name='tableHeader'],
-  td[data-name='tableCell'] {
+  th[data-node-name='tableHeader'],
+  td[data-node-name='tableCell'] {
     @apply border border-solid border-stone-200 dark:border-stone-800 min-w-16 px-1 py-1 relative align-top;
   }
-  th[data-name='tableHeader'] {
+  th[data-node-name='tableHeader'] {
     @apply font-semibold text-start bg-gray-100 dark:bg-gray-800;
   }
   .column-resize-handle {

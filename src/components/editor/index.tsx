@@ -6,8 +6,8 @@ import TaskItem from '@tiptap/extension-task-item'
 import TaskList from '@tiptap/extension-task-list'
 import { EditorProvider } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
-import { symbol } from '@vueditor/tiptap-extension-symbol'
 import { Markdown } from 'tiptap-markdown'
+import { symbol } from './extensions/symbol'
 import { tauri } from './extensions/tauri'
 import './index.scss'
 
@@ -25,6 +25,9 @@ export default function Editor() {
     Table.configure({
       resizable: true,
       cellMinWidth: 64,
+      HTMLAttributes: {
+        'data-node-name': 'table',
+      },
     }),
     TableRow,
     TableHeader,
