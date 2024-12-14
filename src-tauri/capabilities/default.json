@@ -8,7 +8,15 @@
   ],
   "permissions": [
     "core:default",
+    "core:window:allow-set-theme",
     "shell:allow-open",
-    "core:window:allow-set-theme"
+    "store:allow-get",
+    "store:allow-set",
+    "store:allow-save",
+    "store:allow-load",
+    "dialog:default",
+    "fs:default",
+    "fs:allow-app-read",
+    "fs:allow-app-write"
   ]
 }

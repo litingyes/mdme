@@ -1,4 +1,4 @@
-use tauri::AppHandle;
+use tauri::{AppHandle, Window};
 
 #[tauri::command]
 pub fn on_change_editor_active(app: AppHandle, active_name: String) {
@@ -9,4 +9,9 @@ pub fn on_change_editor_active(app: AppHandle, active_name: String) {
             check_menu_item.set_checked(menu_id == active_name).unwrap();
         }
     }
+}
+
+#[tauri::command]
+pub fn destroy_window(window: Window) {
+    window.destroy().unwrap();
 }
