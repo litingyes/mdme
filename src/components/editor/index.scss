@@ -1,5 +1,5 @@
 .tiptap {
-  @apply focus-within:outline-none p-4 text-sm text-neutral-800 dark:text-neutral-100;
+  @apply focus-within:outline-none py-8 px-6 text-sm text-neutral-800 dark:text-neutral-100;
 
   h1[data-node-name='heading'] {
     @apply text-4xl text-neutral-950 font-semibold mt-6 mb-5 dark:text-neutral-50;

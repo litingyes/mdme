@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react'
 import Table from '@tiptap/extension-table'
 import TableCell from '@tiptap/extension-table-cell'
 import TableHeader from '@tiptap/extension-table-header'
@@ -7,11 +8,12 @@ import TaskList from '@tiptap/extension-task-list'
 import { EditorProvider } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import { Markdown } from 'tiptap-markdown'
+import { statistics } from './extensions/statistics'
 import { symbol } from './extensions/symbol'
 import { tauri } from './extensions/tauri'
 import './index.scss'
 
-export default function Editor() {
+export default function Editor({ children }: { children?: ReactNode }) {
   const content = `
  MDME 
   `
@@ -33,11 +35,14 @@ export default function Editor() {
     TableHeader,
     TableCell,
     Markdown,
+    statistics,
     symbol,
     tauri,
   ]
 
   return (
-    <EditorProvider extensions={extensions} content={content} />
+    <EditorProvider extensions={extensions} content={content}>
+      {children}
+    </EditorProvider>
   )
 }
