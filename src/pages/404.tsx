@@ -1,6 +1,6 @@
 export default function NotFound() {
   return (
-    <main className="h-screen w-screen overflow-auto">
+    <main>
       <p>404</p>
     </main>
   )

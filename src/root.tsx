@@ -24,7 +24,7 @@ export function Layout({
         <Meta />
         <Links />
       </head>
-      <body>
+      <body className="size-screen overflow-auto bg-gray-50 text-neutral-800 transition-colors dark:(bg-gray-900 text-neutral-100)">
         <SingletonDialog>
           {children}
         </SingletonDialog>

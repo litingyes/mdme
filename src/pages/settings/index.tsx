@@ -10,7 +10,7 @@ const MODULES = [
 
 export default function Settings() {
   return (
-    <main className="h-screen w-screen overflow-auto bg-gray-50 p-4 text-neutral-800 transition-colors dark:(bg-gray-900 text-neutral-100)">
+    <main className="h-screen overflow-auto p-4">
       <TabGroup className="h-full flex gap-4">
         <TabList className="max-h-full overflow-auto rounded-lg bg-gray-200/50 p-2 backdrop-blur-md dark:bg-gray-700/50">
           {
