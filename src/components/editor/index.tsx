@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react'
+import type { EditorProviderProps } from '@tiptap/react'
 import Table from '@tiptap/extension-table'
 import TableCell from '@tiptap/extension-table-cell'
 import TableHeader from '@tiptap/extension-table-header'
@@ -13,7 +13,7 @@ import { symbol } from './extensions/symbol'
 import { tauri } from './extensions/tauri'
 import './index.scss'
 
-export default function Editor({ children }: { children?: ReactNode }) {
+export default function Editor(props: EditorProviderProps) {
   const content = `
  MDME 
   `
@@ -41,8 +41,6 @@ export default function Editor({ children }: { children?: ReactNode }) {
   ]
 
   return (
-    <EditorProvider extensions={extensions} content={content}>
-      {children}
-    </EditorProvider>
+    <EditorProvider extensions={extensions} content={content} {...props} />
   )
 }
