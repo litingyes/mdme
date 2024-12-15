@@ -1,4 +1,4 @@
-use tauri::{menu::MenuEvent, AppHandle, Theme, WebviewUrl, WebviewWindowBuilder};
+use tauri::{menu::MenuEvent, AppHandle, Manager, Theme, WebviewUrl, WebviewWindowBuilder};
 
 use crate::emits::{
     insert_table, set_code_block, set_heading, set_quote_block, toggle_bullet_list,
@@ -6,11 +6,19 @@ use crate::emits::{
 };
 
 pub fn on_settings(app: &AppHandle) {
-    WebviewWindowBuilder::new(app, "settings", WebviewUrl::App("/settings".into()))
-        .inner_size(800.0, 400.0)
-        .position(48.0, 96.0)
-        .build()
-        .unwrap();
+    let settings_label = "settings";
+
+    if let Some(window) = app.get_window(settings_label) {
+        window.show().unwrap();
+        window.set_focus().unwrap();
+    } else {
+        WebviewWindowBuilder::new(app, settings_label, WebviewUrl::App("/settings".into()))
+            .title("Settings")
+            .inner_size(800.0, 400.0)
+            .position(48.0, 96.0)
+            .build()
+            .unwrap();
+    }
 }
 
 pub fn on_theme_light(app: &AppHandle) {
