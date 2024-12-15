@@ -2,7 +2,7 @@ import { useSettings } from '@/hooks/useSettings'
 import { invoke } from '@tauri-apps/api/core'
 import { listen } from '@tauri-apps/api/event'
 import { join } from '@tauri-apps/api/path'
-import { save } from '@tauri-apps/plugin-dialog'
+import { confirm, save } from '@tauri-apps/plugin-dialog'
 import { open } from '@tauri-apps/plugin-fs'
 import { useCurrentEditor, useEditorState } from '@tiptap/react'
 import { useEffect, useState } from 'react'
@@ -30,33 +30,45 @@ export default function EditorFooter() {
     })
   }, [documentsDir, fileName])
   useEffect(() => {
-    const unlisten = listen('close_editor_window', () => {
-      save({
+    const unlisten = listen('close_editor_window', async () => {
+      const path = await save({
         canCreateDirectories: true,
         defaultPath: filePath,
         title: 'Save the markdown',
-      }).then((path) => {
-        if (path) {
-          open(filePath, {
-            read: true,
-            write: true,
-            create: true,
-          }).then(async (file) => {
-            const encoder = new TextEncoder()
-            const content = editor?.storage.markdown?.getMarkdown()
-            const data = encoder.encode(content)
-
-            await file.write(data)
-            invoke('destroy_window')
-          })
-        }
       })
+
+      if (!path) {
+        const isContinue = await confirm('Delete this document or continue editing ?', {
+          cancelLabel: 'Delete',
+          kind: 'error',
+          okLabel: 'Continue',
+          title: fileName,
+        })
+
+        if (!isContinue) {
+          invoke('destroy_window')
+        }
+
+        return
+      }
+
+      const file = await open(filePath, {
+        read: true,
+        write: true,
+        create: true,
+      })
+      const encoder = new TextEncoder()
+      const content = editor?.storage.markdown?.getMarkdown()
+      const data = encoder.encode(content)
+
+      await file.write(data)
+      invoke('destroy_window')
     })
 
     return () => {
       unlisten.then(f => f())
     }
-  }, [filePath, editor?.storage.markdown])
+  }, [fileName, filePath, editor?.storage.markdown])
 
   return (
     <footer className="fixed bottom-0 left-0 right-0 h-8 flex items-center justify-between border-t border-stone-200 border-solid bg-gray-50/5 px-6 backdrop-blur-md dark:border-stone-800">
