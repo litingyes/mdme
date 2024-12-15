@@ -1,5 +1,5 @@
 import type { Theme } from '@tauri-apps/api/window'
-import { Field, Fieldset, Label, Legend, Radio, RadioGroup } from '@headlessui/react'
+import { Radio, RadioGroup } from '@headlessui/react'
 import { getCurrentWindow } from '@tauri-apps/api/window'
 import { useEffect, useMemo, useState } from 'react'
 
@@ -52,12 +52,14 @@ export default function Appearance() {
   }, [theme])
 
   return (
-    <Fieldset>
-      <Legend className="text-xl">Appearance</Legend>
-      <Field className="my-4">
-        <Label>Theme</Label>
-        {themeConfig}
-      </Field>
-    </Fieldset>
+    <div className="flex flex-col gap-4">
+      <div className="rounded-lg bg-gray-100 p-4 transition-all dark:bg-gray-800 hover:shadow-md">
+        <label className="text-base" htmlFor="config-directory">Theme</label>
+        <div id="config-directory" className="mt-1 text-sm text-neutral-500">
+          {' '}
+          {themeConfig}
+        </div>
+      </div>
+    </div>
   )
 }
