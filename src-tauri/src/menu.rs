@@ -128,7 +128,7 @@ pub fn get_paragraph_submenu(app: &AppHandle) -> Submenu<Wry> {
 
 pub fn get_window_submenu(app: &AppHandle) -> Submenu<Wry> {
     SubmenuBuilder::new(app, "Window")
-        .id("theme")
+        .id("window")
         .items(&[
             &PredefinedMenuItem::minimize(app, None).unwrap(),
             &PredefinedMenuItem::maximize(app, None).unwrap(),
