@@ -11,6 +11,7 @@ import { Markdown } from 'tiptap-markdown'
 import { statistics } from './extensions/statistics'
 import { symbol } from './extensions/symbol'
 import { tauri } from './extensions/tauri'
+import { trailingNode } from './extensions/trailingNode'
 import './index.scss'
 
 export default function Editor(props: EditorProviderProps) {
@@ -34,6 +35,7 @@ export default function Editor(props: EditorProviderProps) {
     TableRow,
     TableHeader,
     TableCell,
+    trailingNode,
     Markdown,
     statistics,
     symbol,
