@@ -5,7 +5,9 @@ mod menu_event;
 mod window_event;
 
 use commands::{destroy_window, on_change_editor_active};
-use menu::{get_app_submenu, get_paragraph_submenu, get_theme_submenu, get_window_submenu};
+use menu::{
+    get_app_submenu, get_help_submenu, get_paragraph_submenu, get_theme_submenu, get_window_submenu,
+};
 use menu_event::handle_menu_event;
 use tauri::{generate_handler, menu::Menu};
 use window_event::handle_window_event;
@@ -23,8 +25,9 @@ pub fn run() {
             let paragraph = get_paragraph_submenu(handle);
             let theme = get_theme_submenu(handle);
             let window = get_window_submenu(handle);
+            let help = get_help_submenu(handle);
 
-            Menu::with_items(handle, &[&app, &paragraph, &theme, &window])
+            Menu::with_items(handle, &[&app, &paragraph, &theme, &window, &help])
         })
         .on_menu_event(|app, event| {
             handle_menu_event(app, event);

@@ -1,4 +1,5 @@
 use tauri::{menu::MenuEvent, AppHandle, Manager, Theme, WebviewUrl, WebviewWindowBuilder};
+use tauri_plugin_shell::ShellExt;
 
 use crate::emits::{
     insert_table, set_code_block, set_heading, set_quote_block, toggle_bullet_list,
@@ -51,6 +52,14 @@ pub fn on_theme_dark(app: &AppHandle) {
         .unwrap()
         .set_checked(false)
         .unwrap();
+}
+
+pub fn on_github(app: &AppHandle) {
+    let url = "https://github.com/mdme-x/mdme.git";
+
+    if let Err(e) = app.shell().open(url, None) {
+        eprintln!("Failed to open GitHub link: {}", e);
+    }
 }
 
 pub fn handle_menu_event(app: &AppHandle, event: MenuEvent) {
@@ -106,6 +115,11 @@ pub fn handle_menu_event(app: &AppHandle, event: MenuEvent) {
         }
         "theme-dark" => {
             on_theme_dark(app);
+        }
+
+        // help
+        "github" => {
+            on_github(app);
         }
 
         _ => {}

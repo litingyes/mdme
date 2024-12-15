@@ -140,3 +140,11 @@ pub fn get_window_submenu(app: &AppHandle) -> Submenu<Wry> {
         .build()
         .unwrap()
 }
+
+pub fn get_help_submenu(app: &AppHandle) -> Submenu<Wry> {
+    SubmenuBuilder::new(app, "Help")
+        .id("help")
+        .items(&[&MenuItem::with_id(app, "github", "Github", true, None::<&str>).unwrap()])
+        .build()
+        .unwrap()
+}
