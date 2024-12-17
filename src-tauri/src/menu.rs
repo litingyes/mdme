@@ -102,7 +102,7 @@ pub fn get_paragraph_submenu(app: &AppHandle) -> Submenu<Wry> {
         .unwrap()
 }
 
-pub fn get_theme_menu_items(app: &AppHandle) -> (CheckMenuItem<Wry>, CheckMenuItem<Wry>) {
+pub fn get_theme_submenu(app: &AppHandle) -> Submenu<Wry> {
     let focused_window = app.get_focused_window();
     let mut theme = Theme::Light;
     match focused_window {
@@ -112,33 +112,28 @@ pub fn get_theme_menu_items(app: &AppHandle) -> (CheckMenuItem<Wry>, CheckMenuIt
         None => {}
     }
 
-    let light = CheckMenuItem::with_id(
-        app,
-        "theme-light",
-        "Light",
-        true,
-        theme == Theme::Light,
-        None::<&str>,
-    )
-    .unwrap();
-    let dark = CheckMenuItem::with_id(
-        app,
-        "theme-dark",
-        "Dark",
-        true,
-        theme == Theme::Dark,
-        None::<&str>,
-    )
-    .unwrap();
-
-    (light, dark)
-}
-pub fn get_theme_submenu(app: &AppHandle) -> Submenu<Wry> {
-    let (light, dark) = get_theme_menu_items(app);
-
     SubmenuBuilder::new(app, "Theme")
         .id("theme")
-        .items(&[&light, &dark])
+        .items(&[
+            &CheckMenuItem::with_id(
+                app,
+                "theme-light",
+                "Light",
+                true,
+                theme == Theme::Light,
+                None::<&str>,
+            )
+            .unwrap(),
+            &CheckMenuItem::with_id(
+                app,
+                "theme-dark",
+                "Dark",
+                true,
+                theme == Theme::Dark,
+                None::<&str>,
+            )
+            .unwrap(),
+        ])
         .build()
         .unwrap()
 }
