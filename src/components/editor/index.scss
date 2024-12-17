@@ -27,6 +27,10 @@
     @apply my-2;
   }
 
+  pre[data-node-name='codeBlock'] {
+    @apply p-2 rounded-lg shadow dark:shadow-white/10;
+  }
+
   ul[data-node-name='bulletList'] {
     @apply list-disc ml-6;
 
@@ -84,5 +88,18 @@
   }
   &.resize-cursor {
     @apply cursor-col-resize;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .tiptap {
+    .shiki,
+    .shiki span {
+      color: var(--shiki-dark) !important;
+      background-color: var(--shiki-dark-bg) !important;
+      font-style: var(--shiki-dark-font-style) !important;
+      font-weight: var(--shiki-dark-font-weight) !important;
+      text-decoration: var(--shiki-dark-text-decoration) !important;
+    }
   }
 }

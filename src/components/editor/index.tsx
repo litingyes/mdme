@@ -8,6 +8,7 @@ import TaskList from '@tiptap/extension-task-list'
 import { EditorProvider } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import { Markdown } from 'tiptap-markdown'
+import { codeBlock } from './extensions/codeBlock'
 import { statistics } from './extensions/statistics'
 import { symbol } from './extensions/symbol'
 import { tauri } from './extensions/tauri'
@@ -22,7 +23,9 @@ export default function Editor(props: EditorProviderProps) {
   const extensions = [
     StarterKit.configure({
       hardBreak: false,
+      codeBlock: false,
     }),
+    codeBlock,
     TaskList,
     TaskItem,
     Table.configure({
