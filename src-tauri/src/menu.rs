@@ -23,43 +23,19 @@ pub fn get_app_submenu(app: &AppHandle) -> Submenu<Wry> {
         .unwrap()
 }
 
-pub fn get_theme_menu_items(app: &AppHandle) -> (CheckMenuItem<Wry>, CheckMenuItem<Wry>) {
-    let focused_window = app.get_focused_window();
-    let mut theme = Theme::Light;
-    match focused_window {
-        Some(window) => {
-            theme = window.theme().unwrap();
-        }
-        None => {}
-    }
-
-    let light = CheckMenuItem::with_id(
-        app,
-        "theme-light",
-        "Light",
-        true,
-        theme == Theme::Light,
-        None::<&str>,
-    )
-    .unwrap();
-    let dark = CheckMenuItem::with_id(
-        app,
-        "theme-dark",
-        "Dark",
-        true,
-        theme == Theme::Dark,
-        None::<&str>,
-    )
-    .unwrap();
-
-    (light, dark)
-}
-pub fn get_theme_submenu(app: &AppHandle) -> Submenu<Wry> {
-    let (light, dark) = get_theme_menu_items(app);
-
-    SubmenuBuilder::new(app, "Theme")
-        .id("theme")
-        .items(&[&light, &dark])
+pub fn get_edit_submenu(app: &AppHandle) -> Submenu<Wry> {
+    SubmenuBuilder::new(app, "Edit")
+        .id("edit")
+        .items(&[
+            &PredefinedMenuItem::undo(app, None).unwrap(),
+            &PredefinedMenuItem::redo(app, None).unwrap(),
+            &PredefinedMenuItem::separator(app).unwrap(),
+            &PredefinedMenuItem::select_all(app, None).unwrap(),
+            &PredefinedMenuItem::separator(app).unwrap(),
+            &PredefinedMenuItem::cut(app, None).unwrap(),
+            &PredefinedMenuItem::copy(app, None).unwrap(),
+            &PredefinedMenuItem::paste(app, None).unwrap(),
+        ])
         .build()
         .unwrap()
 }
@@ -122,6 +98,47 @@ pub fn get_paragraph_submenu(app: &AppHandle) -> Submenu<Wry> {
             &CheckMenuItem::with_id(app, "task-list", "Task list", true, false, None::<&str>)
                 .unwrap(),
         ])
+        .build()
+        .unwrap()
+}
+
+pub fn get_theme_menu_items(app: &AppHandle) -> (CheckMenuItem<Wry>, CheckMenuItem<Wry>) {
+    let focused_window = app.get_focused_window();
+    let mut theme = Theme::Light;
+    match focused_window {
+        Some(window) => {
+            theme = window.theme().unwrap();
+        }
+        None => {}
+    }
+
+    let light = CheckMenuItem::with_id(
+        app,
+        "theme-light",
+        "Light",
+        true,
+        theme == Theme::Light,
+        None::<&str>,
+    )
+    .unwrap();
+    let dark = CheckMenuItem::with_id(
+        app,
+        "theme-dark",
+        "Dark",
+        true,
+        theme == Theme::Dark,
+        None::<&str>,
+    )
+    .unwrap();
+
+    (light, dark)
+}
+pub fn get_theme_submenu(app: &AppHandle) -> Submenu<Wry> {
+    let (light, dark) = get_theme_menu_items(app);
+
+    SubmenuBuilder::new(app, "Theme")
+        .id("theme")
+        .items(&[&light, &dark])
         .build()
         .unwrap()
 }
