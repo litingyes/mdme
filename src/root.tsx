@@ -1,5 +1,4 @@
-import { SingletonDialog } from '@/components/singletonDialog'
-import { NextUIProvider } from '@nextui-org/system'
+import { NextUIProvider } from '@nextui-org/react'
 import { useEffect } from 'react'
 import {
   Links,
@@ -55,11 +54,9 @@ export function Layout({
         <Links />
       </head>
       <body className="h-screen w-screen overflow-auto bg-gray-50 text-neutral-800 transition-colors dark:bg-gray-900 dark:text-neutral-100">
-        <SingletonDialog>
-          <NextUIProvider>
-            {children}
-          </NextUIProvider>
-        </SingletonDialog>
+        <NextUIProvider>
+          {children}
+        </NextUIProvider>
         <ScrollRestoration />
         <Scripts />
       </body>

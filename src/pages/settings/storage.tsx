@@ -1,4 +1,5 @@
 import { useSettings } from '@/hooks/useSettings'
+import { Button, Input } from '@nextui-org/react'
 import { open } from '@tauri-apps/plugin-dialog'
 
 export default function SettingsStorage() {
@@ -18,17 +19,18 @@ export default function SettingsStorage() {
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="rounded-lg bg-gray-100 p-4 transition-all hover:shadow-md dark:bg-gray-800">
-        <label className="text-base" htmlFor="config-directory">Config directory</label>
-        <div id="config-directory" className="mt-1 text-sm text-neutral-500">{dataDir}</div>
-      </div>
-      <div className="relative rounded-lg bg-gray-100 p-4 transition-all hover:shadow-md dark:bg-gray-800">
-        <label className="text-base" htmlFor="documents-directory">Documents directory</label>
-        <div id="documents-directory" className="mt-1 text-sm text-neutral-500">{documentsDir}</div>
-        <button className="absolute right-2 top-2 flex size-6 items-center justify-center rounded-lg p-1 text-base transition-all hover:bg-gray-200 dark:hover:bg-gray-700" type="button" onClick={() => toChangeDocumentsDir()}>
-          <i className="i-mdi:edit-outline" />
-        </button>
-      </div>
+      <Input label="Config directory" value={dataDir} type="url" isReadOnly />
+      <Input
+        label="Documents directory"
+        value={documentsDir}
+        type="url"
+        isReadOnly
+        endContent={(
+          <Button size="sm" color="primary" variant="light" isIconOnly onPress={() => toChangeDocumentsDir()}>
+            <i className="icon-[icon-park-outline--config] size-4" />
+          </Button>
+        )}
+      />
     </div>
   )
 }

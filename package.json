@@ -15,9 +15,7 @@
     "prepare": "husky"
   },
   "dependencies": {
-    "@headlessui/react": "^2.2.0",
-    "@nextui-org/system": "^2.4.4",
-    "@nextui-org/theme": "^2.4.3",
+    "@nextui-org/react": "^2.6.8",
     "@react-router/node": "^7.0.2",
     "@tauri-apps/api": "^2.1.1",
     "@tauri-apps/plugin-dialog": "~2",
