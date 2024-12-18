@@ -8,14 +8,14 @@ import TaskList from '@tiptap/extension-task-list'
 import { EditorProvider } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import { Markdown } from 'tiptap-markdown'
-import { codeBlock } from './extensions/codeBlock'
+import { codeBlock, CodeBlockBubbleMenu } from './extensions/codeBlock'
 import { statistics } from './extensions/statistics'
 import { symbol } from './extensions/symbol'
 import { tauri } from './extensions/tauri'
 import { trailingNode } from './extensions/trailingNode'
 import './index.scss'
 
-export default function Editor(props: EditorProviderProps) {
+export default function Editor(props: Omit<EditorProviderProps, 'extensions' | 'content' | 'slotAfter'>) {
   const content = `
  MDME 
   `
@@ -25,7 +25,9 @@ export default function Editor(props: EditorProviderProps) {
       hardBreak: false,
       codeBlock: false,
     }),
-    codeBlock,
+    codeBlock.configure({
+      defaultLanguage: 'text',
+    }),
     TaskList,
     TaskItem,
     Table.configure({
@@ -46,6 +48,13 @@ export default function Editor(props: EditorProviderProps) {
   ]
 
   return (
-    <EditorProvider extensions={extensions} content={content} {...props} />
+    <EditorProvider
+      extensions={extensions}
+      content={content}
+      slotAfter={(
+        <CodeBlockBubbleMenu />
+      )}
+      {...props}
+    />
   )
 }

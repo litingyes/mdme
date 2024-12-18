@@ -5,7 +5,7 @@ import { nextui } from '@nextui-org/react'
 export default {
   content: [
     './src/**/*.{tsx,scss}',
-    './node_modules/@nextui-org/theme/dist/components/(button|input|radio|tabs).js',
+    './node_modules/@nextui-org/theme/dist/components/(autocomplete|button|input|listbox|popover|radio|scroll-shadow|tabs).js',
   ],
   theme: {
     extend: {
