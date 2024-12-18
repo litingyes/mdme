@@ -71,7 +71,7 @@ export default function EditorFooter() {
   }, [fileName, filePath, editor?.storage.markdown])
 
   return (
-    <footer className="fixed bottom-0 left-0 right-0 h-8 flex items-center justify-between border-t border-stone-200 border-solid bg-gray-50/5 px-6 backdrop-blur-md dark:border-stone-800">
+    <footer className="fixed inset-x-0 bottom-0 flex h-8 items-center justify-between border-t border-solid border-stone-200 bg-gray-50/5 px-6 backdrop-blur-md dark:border-stone-800">
       <div className="text-sm text-neutral-700 dark:text-neutral-300">{fileName}</div>
       <div className="flex items-center gap-2 text-xs text-neutral-500">
         <span>

@@ -36,7 +36,7 @@ export const SingletonDialog: FC<{ children: ReactNode }> = ({ children }) => {
     <SingletonDialogContext.Provider value={contextValue}>
       {children}
       <Transition show={isOpen} as={Fragment} appear>
-        <Dialog as="div" className="relative z-10" onClose={close}>
+        <Dialog as="div" className="relative z-50" onClose={close}>
           <TransitionChild
             as={Fragment}
             enter="ease-out duration-300"
@@ -49,7 +49,7 @@ export const SingletonDialog: FC<{ children: ReactNode }> = ({ children }) => {
             <div className="fixed inset-0 bg-black/25" />
           </TransitionChild>
           <div className="fixed inset-0 overflow-y-auto">
-            <div className="min-h-full flex items-center justify-center p-4 text-center">
+            <div className="flex min-h-full items-center justify-center p-4 text-center">
               <TransitionChild
                 as={Fragment}
                 enter="ease-out duration-300"
@@ -59,12 +59,12 @@ export const SingletonDialog: FC<{ children: ReactNode }> = ({ children }) => {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <DialogPanel className="max-w-md w-full transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+                <DialogPanel className="w-full max-w-md overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
                   {
                     title && (
                       <DialogTitle
                         as="h3"
-                        className="text-lg text-gray-900 font-medium leading-6"
+                        className="text-lg font-medium leading-6 text-gray-900"
                       >
                         {title}
                       </DialogTitle>

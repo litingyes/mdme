@@ -84,7 +84,7 @@
     @apply font-semibold text-start bg-gray-100 dark:bg-gray-800;
   }
   .column-resize-handle {
-    @apply absolute w-1 top-0 -bottom-0.5 -right-0.5 pointer-events-none bg-blue-500 z-1;
+    @apply absolute w-1 top-0 -bottom-0.5 -right-0.5 pointer-events-none bg-blue-500 z-10;
   }
   &.resize-cursor {
     @apply cursor-col-resize;
