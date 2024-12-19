@@ -66,9 +66,9 @@ export default function CodeBlockBubbleMenu() {
   }
 
   return (
-    <BubbleMenu editor={editor} pluginKey="codeBlockBubbleMenu" tippyOptions={{ placement: 'top-end', getReferenceClientRect, sticky: 'reference', plugins: [sticky] }} shouldShow={({ editor }) => editor.isActive('codeBlock')}>
+    <BubbleMenu editor={editor} pluginKey="codeBlockBubbleMenu" tippyOptions={{ appendTo: document.body, placement: 'top-end', getReferenceClientRect, sticky: 'reference', plugins: [sticky] }} shouldShow={({ editor }) => editor.isActive('codeBlock')}>
       <div className="w-40 rounded-lg bg-gray-200 p-2 shadow-lg dark:bg-gray-800">
-        <Autocomplete label="Language" size="sm" value={currentLanguage} onSelectionChange={language => onChangeLanguage(language as string)}>
+        <Autocomplete inputProps={{ classNames: { inputWrapper: 'bg-transparent shadow-none' } }} aria-label="Code block language" placeholder="Language" size="sm" value={currentLanguage} onSelectionChange={language => onChangeLanguage(language as string)}>
           {editorState.languages.map(language => <AutocompleteItem key={language}>{language}</AutocompleteItem>)}
         </Autocomplete>
       </div>
